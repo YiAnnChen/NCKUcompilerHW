@@ -111,16 +111,16 @@ ident {letter}({letter}|{digit})*
                  if (line_num != last_comment_line) {
                         comment_num++;
                         last_comment_line = line_num;}
-                yymore();}
-<COMMENT>(.|\r?) {yymore();}
-<COMMENT>\n {   yymore();
+                printf("%s", yytext);}
+<COMMENT>(.|\r?) {printf("%s", yytext);}
+<COMMENT>\n {   printf("%s", yytext);
                 line_num++; 
                 if (line_num != last_comment_line) {
                     comment_num++;
                     last_comment_line = line_num;
                 }}
 <COMMENT>"*/" {
-    
+
     BEGIN(INITIAL);
     print_token("MUTI_LINE_COMMENT");
     }
